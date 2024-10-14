@@ -34,20 +34,10 @@ ion-menu ion-content {
             border-radius: 20px;
             padding: 3px;
             background: black;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: destination-out;
             mask-composite: exclude;
         }
-        // ion-fab {
-        //     margin: 0 -10px -14px 10px;
-        //     width: 20px;
-        //     height: 20px;
-        //     ion-fab-button {
-        //         width: 20px;
-        //         height: 20px;
-        //         --background: linear-gradient(to bottom, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80);
-        //     }
-        // }
+
       }
       div {
           transform: translateY(3vh);

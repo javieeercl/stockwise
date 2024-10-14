@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title class="ion-text-center center">
+      <ion-label>
+        <ion-text color="dark">Panel de</ion-text>
+        <p><ion-text color="dark"><strong>Administración</strong></ion-text></p>
+      </ion-label>
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/publico/portal"></ion-back-button>
+    </ion-buttons>
+    <!-- <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="flex-center">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title color="warning">Administración</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-button color="warning" size="full" type="submit" [routerLink]="['/backend/adm-tecno']">Administrar Tecnologías</ion-button>
+        <br>
+        <ion-button color="warning" size="full" type="submit" [routerLink]="['/backend/adm-proyecto']">Administrar Proyectos</ion-button>
+        <br>
+        <ion-button color="warning" size="full" type="submit" [routerLink]="['/backend/adm-contacto']">Administrar Contactos</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

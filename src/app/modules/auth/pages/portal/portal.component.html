@@ -1,3 +1,92 @@
-<p>
-  portal works!
-</p>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="warning">
+    <ion-title class="ion-text-center center">
+      <ion-label>
+        <ion-text color="dark">Bienvenido a</ion-text>
+        <p><ion-text color="dark"><strong>StockWise</strong></ion-text></p>
+      </ion-label>
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <app-shrink-header [scrollArea]="myContent" [headerHeight]="120">
+    <ion-grid [style.padding-bottom.px]="120 - newHeight"></ion-grid>
+    <ion-list class="popover" lines="none"
+      [style.margin-top.px]="-120 - newHeight/2">
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label class="ion-text-wrap ion-text-center">
+              <h1>
+                <b>{{contadorTecnologias}}</b>
+              </h1>
+              <p>Tecnologías dominadas</p>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label class="ion-text-wrap ion-text-center">
+              <h1>
+                <b>{{contadorProyectos}}</b>
+              </h1>
+              <p>Proyectos</p>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+    </ion-list>
+  </app-shrink-header>
+
+  <div class="ion-padding" (ionChange)="segmentChanged($event)">
+    <ion-segment mode="ios" [value]="segmentValue">
+      <ion-segment-button value="1">
+        <ion-label>Inventario</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        <ion-label>Analytics</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="scroll($event)" #myContent>
+  <ion-fab *ngIf="login" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="warning" [routerLink]="['/privado/contacto']" routerLinkActive="selected" >
+      <ion-icon name="document"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <ion-list lines="none" class="ion-no-padding">
+    <ion-item color="light">
+      <ion-label class="heading ion-text-center  ion-text-wrap" style="font-size:large; font-weight: bold;">{{segmentValue === '1' ? 'Categorías y Productos' : 'Dashboards'}}</ion-label>
+      <ion-button *ngIf="login && rol === 'admin'" slot="end" fill="clear" size="small" [routerLink]="['/backend/panel-admin']" routerDirection="root" routerLinkActive="selected">
+        <ion-icon class="clr" slot="icon-only" name="options"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item-group>
+      <ion-item class="ion-padding-vertical popItem"
+        *ngFor="let item of (segmentValue === '1') ? tecnologias : proyectos">
+        <ion-thumbnail slot="start">
+          <ion-img [src]="item?.imagenUrl"></ion-img>
+        </ion-thumbnail>
+        <ion-label>
+          <ion-note color="dark"><b>{{item?.nombre}}</b></ion-note>
+          <p *ngIf="item?.descripcion" class="ion-text-wrap"><strong>Descripción: </strong>{{item?.descripcion}}</p>
+          <p>
+            <ion-text *ngIf="item?.nivel" color="dark"><strong>Nivel:</strong> {{item?.nivel}}</ion-text>
+          </p>
+        </ion-label>
+
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+
+</ion-content>
+
+<app-footer></app-footer>

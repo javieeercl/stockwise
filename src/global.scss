@@ -10,28 +10,53 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-@import "@ionic/angular/css/normalize.css";
-@import "@ionic/angular/css/structure.css";
-@import "@ionic/angular/css/typography.css";
-@import "@ionic/angular/css/display.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
-@import "@ionic/angular/css/padding.css";
-@import "@ionic/angular/css/float-elements.css";
-@import "@ionic/angular/css/text-alignment.css";
-@import "@ionic/angular/css/text-transformation.css";
-@import "@ionic/angular/css/flex-utils.css";
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(to right,#fcb000, #ffd062)  !important;
+
+      --padding-start: 16px;
+      --padding-end: 16px;
+      // ion-title {
+      //     max-width: 40vh;
+      //     ion-label {
+      //         ion-text {
+      //             font-size: 0.8rem;
+      //         }
+      //         p {
+      //             ion-text {
+      //                 font-size: 1.1rem !important;
+      //             }
+      //         }
+      //     }
+      // }
+      ion-avatar {
+          height: 2.5rem;
+          width: 2.5rem;
+          border: 1px solid var(--ion-color-tertiary);
+          img {
+              max-width: 100%;
+          }
+      }
+  }
+}
