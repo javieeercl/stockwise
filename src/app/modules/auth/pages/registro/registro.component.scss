@@ -1,0 +1,24 @@
+ion-header {
+    * {
+      font-family: lato;
+  
+    }
+  }
+  
+  ion-content {
+    * {
+      font-family: lato;
+  
+    }
+  
+    div{
+      // height: 100%;
+      display: flex;
+      align-items: center;
+        ion-card{
+          width: 400px;
+        }
+      }
+  }
+  
+  

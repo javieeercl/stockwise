@@ -1,3 +1,40 @@
-<p>
-  login works!
-</p>
+
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title class="ion-text-center center">Login</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="flex-center">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title color="warning">Inicia Sesión</ion-card-title>
+      </ion-card-header>
+
+
+      <ion-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <ion-item fill="outline" lines="none" class="ion-margin">
+            <ion-label position="floating">Correo Electrónico</ion-label>
+            <ion-input formControlName="email" type="text" placeholder="correo@mail.com"></ion-input>
+            <ion-note class="form-error" *ngIf="email.invalid && email.touched" slot="error">Debes ingresar tu correo electrónico</ion-note>
+
+          </ion-item>
+          <ion-item fill="outline" lines="none" class="ion-margin">
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input formControlName="password" type="password" placeholder="********"></ion-input>
+            <ion-note class="form-error" *ngIf="password.invalid && password.touched" slot="error">Debes ingresar tu contraseña</ion-note>
+          </ion-item>
+          <br>
+          <ion-button color="dark" fill="clear" size="full" [routerLink]="['/publico/recuperacion']">Olvidé mi contraseña</ion-button>
+          <ion-button type="submit" color="warning" size="full">Ingresar</ion-button>
+          <ion-button color="dark" fill="clear" size="full" [routerLink]="['/publico/registro']">Registrarme</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+<app-footer></app-footer>
