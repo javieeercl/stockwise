@@ -21,6 +21,7 @@ import { ComponentsModule } from './components/components.module';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 
 
@@ -35,7 +36,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
   AngularFirestoreModule,
   AngularFireAuthModule,
   AngularFireStorageModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideCharts(withDefaultRegisterables())],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

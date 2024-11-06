@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -106,4 +107,9 @@ export class DatabaseService {
     const collection = this.firestore.collection(path).doc(id).collection<Tipo>(subpath);
     return collection.doc(subId).valueChanges();
   }
+
+  getCategorias(): Observable<any[]> {
+    return this.firestore.collection('Categoria').valueChanges();
+  }
+
 }

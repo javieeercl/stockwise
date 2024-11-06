@@ -12,10 +12,12 @@ import { ItemListComponent } from './pages/item-list/item-list.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PanelAdminComponent } from './pages/panel-admin/panel-admin.component';
+import { ProductListComponent } from './pages/product-list/product-list.component';
+import { CategoriesListComponent } from './pages/categories-list/categories-list.component';
 
 
 @NgModule({
-  declarations: [AddItemComponent, ItemDetailComponent, ItemListComponent, PanelAdminComponent],
+  declarations: [AddItemComponent, ItemDetailComponent, ItemListComponent, PanelAdminComponent, ProductListComponent, CategoriesListComponent],
   imports: [
     CommonModule,
     BackendRoutingModule,

@@ -9,6 +9,8 @@ import { AuthRoutingModule } from './auth-routing-module';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecuperacionComponent } from './pages/recuperacion/recuperacion.component';
+import { BaseChartDirective } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [LoginComponent, PortalComponent, RegistroComponent, RecuperacionComponent, ResetComponent],
@@ -18,7 +20,8 @@ import { RecuperacionComponent } from './pages/recuperacion/recuperacion.compone
     ComponentsModule,
     AuthRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BaseChartDirective
   ]
 })
 export class AuthModule { }

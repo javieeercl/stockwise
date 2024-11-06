@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title class="ion-text-center center">
+      <ion-label>
+        <ion-text color="dark">Administrar</ion-text>
+        <p><ion-text color="dark"><strong>Producto</strong></ion-text></p>
+      </ion-label>
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/publico/portal"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="flex-center">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="4" size-lg="3" *ngFor="let producto of productos">
+          <ion-card>
+            <ion-card-header>
+              <ion-item lines="none" class="ion-align-items-center">
+                <ion-thumbnail slot="start">
+                  <ion-img [src]="producto.imagenUrl"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                  <ion-note color="dark"><b>{{producto.nombre}}</b></ion-note>
+                  <p><strong>Precio:</strong> {{ producto.precio }}</p>
+                  <p><strong>Stock:</strong> {{ producto.stock }}</p>
+                  <ion-button expand="block" color="primary">Ver</ion-button>
+                </ion-label>
+              </ion-item>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <p *ngIf="productos.length === 0">No hay productos disponibles para esta categoría.</p>
+  </div>
+</ion-content>
