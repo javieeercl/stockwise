@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Categoría</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nombre de Categoría</ion-label>
+      <ion-input formControlName="nombre" required></ion-input>
+    </ion-item>
+    <ion-button expand="full" type="submit" [disabled]="form.invalid">Agregar</ion-button>
+  </form>
+</ion-content>

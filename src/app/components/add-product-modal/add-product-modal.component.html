@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Producto</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nombre del Producto</ion-label>
+      <ion-input formControlName="nombre" required></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input type="number" formControlName="precio" required></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="floating">Stock</ion-label>
+      <ion-input type="number" formControlName="stock" required></ion-input>
+    </ion-item>
+    
+    <ion-button expand="full" type="submit" [disabled]="form.invalid">Agregar</ion-button>
+  </form>
+</ion-content>

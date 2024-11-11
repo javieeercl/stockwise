@@ -2,6 +2,18 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 
+export interface Categoria {
+  id?: string;
+  nombre: string;
+}
+
+export interface Producto {
+  id?: string;
+  nombre: string;
+  precio: number;
+  stock: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -108,8 +120,64 @@ export class DatabaseService {
     return collection.doc(subId).valueChanges();
   }
 
-  getCategorias(): Observable<any[]> {
-    return this.firestore.collection('Categoria').valueChanges();
+
+
+  //
+
+  createCategoria(data: Categoria): Promise<void> {
+    const id = this.firestore.createId();
+    return this.firestore.collection('Categoria').doc(id).set({ ...data, id });
   }
+
+  getCategorias(): Observable<Categoria[]> {
+    return this.firestore.collection<Categoria>('Categoria').valueChanges();
+  }
+
+  updateCategoria(id: string, data: Partial<Categoria>): Promise<void> {
+    return this.firestore.collection('Categoria').doc(id).update(data);
+  }
+
+  deleteCategoria(id: string): Promise<void> {
+    return this.firestore.collection('Categoria').doc(id).delete();
+  }
+
+  
+  addProductoToCategoria(categoriaId: string, producto: Producto): Promise<void> {
+    const productoId = this.firestore.createId();
+    return this.firestore
+      .collection('Categoria')
+      .doc(categoriaId)
+      .collection('Producto')
+      .doc(productoId)
+      .set({ ...producto, id: productoId });
+  }
+
+
+  getProductos(categoriaId: string): Observable<Producto[]> {
+    return this.firestore.collection('Categoria').doc(categoriaId)
+      .collection<Producto>('Producto').valueChanges();
+  }
+
+  updateProducto(categoriaId: string, productoId: string, data: Partial<Producto>): Promise<void> {
+    return this.firestore.collection('Categoria').doc(categoriaId)
+      .collection('Producto').doc(productoId).update(data);
+  }
+
+  deleteProducto(categoriaId: string, productoId: string): Promise<void> {
+    return this.firestore.collection('Categoria').doc(categoriaId)
+      .collection('Producto').doc(productoId).delete();
+  }
+
+  // Fetch specific Categoria or Producto by ID
+
+  getCategoriaById(id: string): Observable<Categoria | undefined> {
+    return this.firestore.collection('Categoria').doc<Categoria>(id).valueChanges();
+  }
+
+  getProductoById(categoriaId: string, productoId: string): Observable<Producto | undefined> {
+    return this.firestore.collection('Categoria').doc(categoriaId)
+      .collection<Producto>('Producto').doc(productoId).valueChanges();
+  }
+  
 
 }

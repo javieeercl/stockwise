@@ -14,10 +14,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PanelAdminComponent } from './pages/panel-admin/panel-admin.component';
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { CategoriesListComponent } from './pages/categories-list/categories-list.component';
+import { AddCategoriesComponent } from './pages/add-categories/add-categories.component';
 
 
 @NgModule({
-  declarations: [AddItemComponent, ItemDetailComponent, ItemListComponent, PanelAdminComponent, ProductListComponent, CategoriesListComponent],
+  declarations: [AddItemComponent, ItemDetailComponent, ItemListComponent, PanelAdminComponent, ProductListComponent, CategoriesListComponent, AddCategoriesComponent],
   imports: [
     CommonModule,
     BackendRoutingModule,

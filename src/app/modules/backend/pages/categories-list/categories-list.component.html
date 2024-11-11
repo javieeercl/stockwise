@@ -1,3 +1,46 @@
-<p>
-  categories-list works!
-</p>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="warning">
+    <ion-title class="ion-text-center center">
+      <ion-label>
+        <ion-text color="dark">Administración</ion-text>
+        <p><ion-text color="dark"><strong>Categorías</strong></ion-text></p>
+      </ion-label>
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/publico/portal"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="warning" (click)="openAddCategoryModal()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div class="flex-center">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="4" size-lg="3" *ngFor="let item of categorias">
+          <ion-card>
+            <ion-card-header>
+              <ion-item lines="none" class="ion-align-items-center">
+                <ion-thumbnail slot="start">
+                  <ion-img [src]="item.imagenUrl"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                  <ion-note color="dark"><b>{{item.nombre}}</b></ion-note>
+                  <ion-button expand="block" color="primary" (click)="mostrarProductos(item.id)">Ver</ion-button>
+                </ion-label>
+              </ion-item>
+            </ion-card-header>
+          </ion-card>
+          <p class="flex-center" *ngIf="item.length === 0">No hay categorias disponibles para esta categoría.</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
