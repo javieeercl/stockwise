@@ -40,10 +40,11 @@ export class RecuperacionComponent {
           await this.auth.requestPassword(email).then(() => {
             this.form.reset();
             this.interaction.closeLoading();
-            this.interaction.presentToast('Correo enviado con exito');
+            this.interaction.presentToast('Correo enviado con exito', 'success');
             this.router.navigate(['/publico/login']);
           }).catch(err => {
             this.interaction.closeLoading();
+            this.interaction.presentToast('Error al enviar correo', 'danger');
           });
         }
     }  else {

@@ -1,8 +1,7 @@
-import { DatabaseService } from './../../services/database.service';
+import { DatabaseService, Usuario } from './../../services/database.service';
 import { InteractionsService } from './../../services/interactions.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Usuario } from 'src/app/models/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -49,7 +48,7 @@ export class MenuComponent{
           text: 'Si',
           handler: () => {
             this.auth.logout();
-            this.interaction.presentToast('Sesión Finalizada');
+            this.interaction.presentToast('Sesión Finalizada', 'success');
             this.router.navigate(['/publico/portal'])
           }
         }
@@ -60,9 +59,8 @@ export class MenuComponent{
 }
 
 getDatosUsuario(uid: string){
-  const path = 'Usuario';
   const id = uid;
-  this.database.getDoc<Usuario>(path, id).subscribe(res=>{
+  this.database.getUsuario(id).subscribe(res=>{
     if(res){
       this.info = res;
       this.rol = res.rol;

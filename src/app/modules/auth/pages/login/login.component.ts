@@ -44,7 +44,7 @@ export class LoginComponent {
       await this.auth.login(email, password).then((response) => {
         this.interaction.closeLoading();
         this.form.reset();
-        this.interaction.presentToast('Sesión Iniciada');
+        this.interaction.presentToast('Sesión Iniciada', 'success');
         this.router.navigate(['/publico/portal']);
       }).catch(err => {
         this.interaction.closeLoading();

@@ -71,12 +71,13 @@ export class ResetComponent implements OnInit {
         // Llamada al método para cambiar la contraseña usando el oobCode
         await this.auth.passwordReset(password, this.oobCode).then((response) => {
           this.interaction.closeLoading();
-          this.interaction.presentToast('Contraseña modificada con éxito');
+          this.interaction.presentToast('Contraseña modificada con éxito', 'success');
           this.form.reset();
           this.router.navigate(['/publico/login']);
         }).catch(err => {
           this.interaction.closeLoading();
           this.interaction.presentAlert('Error', 'Hubo un problema al cambiar la contraseña', '', 'Ok');
+          this.interaction.presentToast('La contraseña no ha sido modificada', 'danger');
         });
       }
     } else {

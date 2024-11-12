@@ -1,0 +1,9 @@
+[
+    {
+      "origin": ["http://localhost:8100", "https://stockwise-fe332.web.app"],
+      "responseHeader": ["Content-Type", "Authorization"],
+      "method": ["GET", "POST", "PUT"],
+      "maxAgeSeconds": 3600
+    }
+  ]
+  

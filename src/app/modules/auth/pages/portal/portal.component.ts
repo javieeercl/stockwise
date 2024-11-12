@@ -1,6 +1,5 @@
 import { Tecnologia, Proyecto } from './../../../../models/models';
-import { DatabaseService } from './../../../../services/database.service';
-import { Usuario } from 'src/app/models/models';
+import { DatabaseService, Usuario } from './../../../../services/database.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
@@ -52,9 +51,8 @@ export class PortalComponent implements OnInit {
   }
 
   getDatosUsuario(uid: string){
-    const path = 'Usuario';
     const id = uid;
-    this.database.getDoc<Usuario>(path, id).subscribe(res=>{
+    this.database.getUsuario(id).subscribe(res=>{
       if(res){
         this.info = res;
         this.rol = res.rol;
@@ -63,7 +61,7 @@ export class PortalComponent implements OnInit {
   }
 
   obtenerCategorias() {
-    this.database.getCollection('Categoria').subscribe(res => {
+    this.database.getCategorias().subscribe(res => {
       this.categorias = res;
     });
   }

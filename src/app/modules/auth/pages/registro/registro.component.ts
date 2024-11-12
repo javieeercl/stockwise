@@ -104,12 +104,12 @@ export class RegistroComponent implements OnInit {
           this.data.password = '';
           this.data.vigente = true;
 
-          await this.database.createDoc(this.data, path, id).then(() => {
+          await this.database.createUsuario(this.data).then(() => {
 
             this.form.reset();
             this.auth.logout();
             this.interaction.closeLoading();
-            this.interaction.presentToast('Registrado con exito');
+            this.interaction.presentToast('Registrado con exito', 'success');
             this.router.navigate(['/publico/login'])
 
           });

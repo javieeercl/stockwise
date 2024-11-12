@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs/internal/Observable';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 export interface Categoria {
   id?: string;
   nombre: string;
+  imagenUrl?: string;
 }
 
 export interface Producto {
@@ -12,125 +15,32 @@ export interface Producto {
   nombre: string;
   precio: number;
   stock: number;
+  imagenUrl?: string;
+}
+
+export interface Usuario {
+  uid: string;
+  email: string;
+  nombre_completo: string;
+  password?: string; // Se sugiere no almacenar contraseñas en texto plano
+  rol: string;
+  vigente: boolean;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
+  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) {}
 
-  constructor(private firestore: AngularFirestore) {}
-
-  createDoc(data: any, path: any, id: any){
-    const collection = this.firestore.collection(path);
-    return collection.doc(id).set(data);
+  // Métodos para Categorías
+  getCategorias(): Observable<Categoria[]> {
+    return this.firestore.collection<Categoria>('Categoria').valueChanges();
   }
-
-  createSubDoc(data: any, path: string, id: string, subPath:string, subId:string){
-    const collection = this.firestore.collection(path).doc(id).collection(subPath);
-    return collection.doc(subId).set(data);
-  }
-
-  createSecSubDoc(data: any, path: string, id: string, subPath:string, subId:string, secSubPath: string, secSubId: string){
-    const collection = this.firestore.collection(path).doc(id).collection(subPath).doc(subId).collection(secSubPath);
-    return collection.doc(secSubId).set(data);
-  }
-
-  getDoc<Tipo>(path: string, id: string){
-    const collection = this.firestore.collection<Tipo>(path);
-    return collection.doc(id).valueChanges();
-  }
-
-  deleteDoc(path: string, id: string){
-    const collection = this.firestore.collection(path);
-    return collection.doc(id).delete();
-  }
-
-  updateDoc(data: any, path: string, id: string){
-    const collection = this.firestore.collection(path);
-    return collection.doc(id).update(data);
-  }
-
-  updateSubDoc(data: any, path: string, id: string, subPath:string, subId:string){
-    const collection = this.firestore.collection(path).doc(id).collection(subPath);
-    return collection.doc(subId).update(data);
-  }
-
-  getId(){
-    return this.firestore.createId();
-  }
-
-  async createDocID<Tipo>(data: Tipo, enlace: string, idDoc: string){
-    const itemsCollection= this.firestore.collection<Tipo>(enlace);
-    return itemsCollection.doc(idDoc).set(data);
-  }
-
-  getCollection<Tipo>(path: string) {
-    const collection = this.firestore.collection<Tipo>(path);
-    return collection.valueChanges();
-  }
-
-  getCollectionQuery<Tipo>(path: string, parametro: string, condicion: any, busqueda: string) {
-    const collection = this.firestore.collection<Tipo>(path,
-      ref => ref.where( parametro, condicion, busqueda));
-    return collection.valueChanges();
-  }
-
-  getCollectionAll<Tipo>(path: string, parametro: string, condicion: any, busqueda: string, startAt: any) {
-    if (startAt == null) {
-      startAt = new Date();
-    }
-    const collection = this.firestore.collectionGroup<Tipo>(path,
-      ref => ref.where( parametro, condicion, busqueda)
-                .orderBy('fecha', 'desc')
-                .limit(1)
-                .startAfter(startAt)
-      );
-    return collection.valueChanges();
-  }
-
-  getCollectionPaginada<Tipo>(path: string, limit: number, startAt: any) {
-    if (startAt == null) {
-      startAt = new Date();
-    }
-    const collection = this.firestore.collection<Tipo>(path,
-      ref => ref.orderBy('fecha', 'desc')
-                .limit(limit)
-                .startAfter(startAt)
-      );
-    return collection.valueChanges();
-  }
-
-  crearSubColeccion(collectionPath: string, idDoc: string, newPath: string, newId: string, data: any){
-    const collection = this.firestore.collection(collectionPath).doc(idDoc).collection(newPath);
-    return collection.doc(newId).set(data);
-  }
-
-  getSubCollection<Tipo>(path: string, id: string, subpath: string) {
-    const collection = this.firestore.collection(path).doc(id).collection<Tipo>(subpath);
-    return collection.valueChanges();
-  }
-  get3rdCollection<Tipo>(path: string, id: string, subpath: string, secId: string, secSubPath: string) {
-    const collection = this.firestore.collection(path).doc(id).collection(subpath).doc(secId).collection<Tipo>(secSubPath);
-    return collection.valueChanges();
-  }
-
-  getSubDoc<Tipo>(path: string, id: string, subpath: string, subId: string){
-    const collection = this.firestore.collection(path).doc(id).collection<Tipo>(subpath);
-    return collection.doc(subId).valueChanges();
-  }
-
-
-
-  //
 
   createCategoria(data: Categoria): Promise<void> {
     const id = this.firestore.createId();
     return this.firestore.collection('Categoria').doc(id).set({ ...data, id });
-  }
-
-  getCategorias(): Observable<Categoria[]> {
-    return this.firestore.collection<Categoria>('Categoria').valueChanges();
   }
 
   updateCategoria(id: string, data: Partial<Categoria>): Promise<void> {
@@ -141,43 +51,41 @@ export class DatabaseService {
     return this.firestore.collection('Categoria').doc(id).delete();
   }
 
-  
-  addProductoToCategoria(categoriaId: string, producto: Producto): Promise<void> {
-    const productoId = this.firestore.createId();
-    return this.firestore
-      .collection('Categoria')
-      .doc(categoriaId)
-      .collection('Producto')
-      .doc(productoId)
-      .set({ ...producto, id: productoId });
+  // Métodos para Productos
+  getProductos(categoriaId: string): Observable<Producto[]> {
+    return this.firestore.collection('Categoria').doc(categoriaId).collection<Producto>('Producto').valueChanges();
   }
 
-
-  getProductos(categoriaId: string): Observable<Producto[]> {
-    return this.firestore.collection('Categoria').doc(categoriaId)
-      .collection<Producto>('Producto').valueChanges();
+  addProductoToCategoria(categoriaId: string, producto: Producto): Promise<void> {
+    const productoId = this.firestore.createId();
+    return this.firestore.collection('Categoria').doc(categoriaId).collection('Producto').doc(productoId).set({ ...producto, id: productoId });
   }
 
   updateProducto(categoriaId: string, productoId: string, data: Partial<Producto>): Promise<void> {
-    return this.firestore.collection('Categoria').doc(categoriaId)
-      .collection('Producto').doc(productoId).update(data);
+    return this.firestore.collection('Categoria').doc(categoriaId).collection('Producto').doc(productoId).update(data);
   }
 
   deleteProducto(categoriaId: string, productoId: string): Promise<void> {
-    return this.firestore.collection('Categoria').doc(categoriaId)
-      .collection('Producto').doc(productoId).delete();
+    return this.firestore.collection('Categoria').doc(categoriaId).collection('Producto').doc(productoId).delete();
   }
 
-  // Fetch specific Categoria or Producto by ID
-
-  getCategoriaById(id: string): Observable<Categoria | undefined> {
-    return this.firestore.collection('Categoria').doc<Categoria>(id).valueChanges();
+  createUsuario(usuario: Usuario): Promise<void> {
+    const uid = usuario.uid || this.firestore.createId();
+    return this.firestore.collection('Usuario').doc(uid).set({ ...usuario, uid });
   }
 
-  getProductoById(categoriaId: string, productoId: string): Observable<Producto | undefined> {
-    return this.firestore.collection('Categoria').doc(categoriaId)
-      .collection<Producto>('Producto').doc(productoId).valueChanges();
+  // Obtener usuario por UID
+  getUsuario(uid: string): Observable<Usuario | undefined> {
+    return this.firestore.collection<Usuario>('Usuario').doc(uid).valueChanges();
   }
-  
 
+  // Actualizar usuario
+  updateUsuario(uid: string, data: Partial<Usuario>): Promise<void> {
+    return this.firestore.collection('Usuario').doc(uid).update(data);
+  }
+
+  // Eliminar usuario
+  deleteUsuario(uid: string): Promise<void> {
+    return this.firestore.collection('Usuario').doc(uid).delete();
+  }
 }

@@ -11,7 +11,7 @@ export class InteractionsService {
   constructor(public toastController: ToastController, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
   }
 
-  async presentToast(mensaje: string) {
+  async presentToast(mensaje: string, p0: string) {
     const toast = await this.toastController.create({
       message: mensaje,
       duration: 3000,

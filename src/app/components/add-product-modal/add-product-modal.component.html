@@ -1,6 +1,8 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Agregar Producto</ion-title>
+  <ion-toolbar color="warning">
+    <ion-title class="ion-text-center">
+      <ion-text color="dark">{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</ion-text>
+    </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">Cerrar</ion-button>
     </ion-buttons>
@@ -13,7 +15,15 @@
       <ion-label position="floating">Nombre del Producto</ion-label>
       <ion-input formControlName="nombre" required></ion-input>
     </ion-item>
-    
+
+    <ion-img *ngIf="imageUrl" [src]="imageUrl" class="imgProd"></ion-img>
+
+    <!-- Campo de entrada de archivo -->
+    <ion-item fill="outline" lines="none" class="ion-margin">
+      <ion-label>Imagen</ion-label>
+      <input type="file" (change)="chooseFile($event)" />
+    </ion-item>
+
     <ion-item>
       <ion-label position="floating">Precio</ion-label>
       <ion-input type="number" formControlName="precio" required></ion-input>
@@ -24,6 +34,8 @@
       <ion-input type="number" formControlName="stock" required></ion-input>
     </ion-item>
     
-    <ion-button expand="full" type="submit" [disabled]="form.invalid">Agregar</ion-button>
+    <ion-button expand="full" type="submit" [disabled]="form.invalid">
+      {{ isEditing ? 'Actualizar' : 'Agregar' }}
+    </ion-button>
   </form>
 </ion-content>
