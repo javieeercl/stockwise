@@ -10,7 +10,7 @@ admin.firestore().settings({
 });
 
 const app = express();
-app.use(cors({ origin: "http://localhost:8100" })); // Permitir solicitudes de "http://localhost:8100"
+app.use(cors({ origin: "*" })); // Permitir solicitudes de "http://localhost:8100"
 
 app.post("/createUser", async (req, res) => {
     try {
