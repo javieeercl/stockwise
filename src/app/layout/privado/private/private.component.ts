@@ -5,10 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './private.component.html',
   styleUrls: ['./private.component.scss'],
 })
-export class PrivateComponent  implements OnInit {
+export class PrivateComponent {
 
   constructor() { }
-
-  ngOnInit() {}
 
 }

@@ -2,7 +2,7 @@ import { InteractionsService } from './../../../../services/interactions.service
 import { Router } from '@angular/router';
 import { AuthService } from './../../../../services/auth.service';
 import { Usuario } from './../../../../models/models';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AbstractControl, ValidationErrors, ValidatorFn, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { formatDate } from "@angular/common";
 import { DatabaseService } from 'src/app/services/database.service';
@@ -55,10 +55,6 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.reset();
-  }
-
-  ngOnDestroy(): void {
-
   }
 
   get nombre_completo(): any {

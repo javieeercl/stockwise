@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'publico/portal',
+    redirectTo: 'publico/login',
     pathMatch: 'full'
   },
 ];

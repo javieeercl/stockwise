@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
-export class MenuComponent{
+export class MenuComponent {
 
   uid: string | undefined ;
   info: Usuario | undefined;
@@ -56,18 +56,16 @@ export class MenuComponent{
     });
 
     await alert.present();
-}
+  }
 
-getDatosUsuario(uid: string){
-  const id = uid;
-  this.database.getUsuario(id).subscribe(res=>{
-    if(res){
-      this.info = res;
-      this.rol = res.rol;
-    }
-  });
-}
-
-  ngOnInit() {}
+  getDatosUsuario(uid: string){
+    const id = uid;
+    this.database.getUsuario(id).subscribe(res=>{
+      if(res){
+        this.info = res;
+        this.rol = res.rol;
+      }
+    });
+  }
 
 }

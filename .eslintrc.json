@@ -13,6 +13,10 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "indent": ["warn", 2], // Ajusta la indentación a 2 espacios
+        "object-curly-spacing": ["warn", "always"],
+        "no-trailing-spaces": "warn",
+        "comma-dangle": ["warn", "always-multiline"],
         "@angular-eslint/component-class-suffix": [
           "error",
           {

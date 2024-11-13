@@ -1,0 +1,39 @@
+<!-- src/app/components/add-user-modal/add-user-modal.component.html -->
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Agregar Usuario</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nombre Completo</ion-label>
+      <ion-input formControlName="nombre_completo" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input formControlName="password" type="password" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Rol</ion-label>
+      <ion-select formControlName="rol">
+        <ion-select-option value="admin">Admin</ion-select-option>
+        <ion-select-option value="usuario">Usuario</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="form.invalid">Crear Usuario</ion-button>
+  </form>
+</ion-content>

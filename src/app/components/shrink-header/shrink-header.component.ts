@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, AfterViewInit } from '@angular/core';
 import { DomController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
@@ -7,10 +7,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './shrink-header.component.html',
   styleUrls: ['./shrink-header.component.scss'],
 })
-export class ShrinkHeaderComponent implements OnInit, OnDestroy {
+export class ShrinkHeaderComponent implements OnDestroy, AfterViewInit {
 
-  @Input('scrollArea') scrollArea: any;
-  @Input('headerHeight')
+  @Input() scrollArea: any;
+  @Input()
   headerHeight!: number;
   newHeaderHeight: any;
   scrollSub: Subscription | undefined;
@@ -20,8 +20,6 @@ export class ShrinkHeaderComponent implements OnInit, OnDestroy {
     public renderer: Renderer2,
     public domCtrl: DomController
   ) { }
-
-  ngOnInit() {}
 
   ngAfterViewInit() {
     this.renderer.setStyle(this.element.nativeElement, 'height', this.headerHeight + 'px');
