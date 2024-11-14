@@ -20,7 +20,6 @@ export class ProductListComponent implements OnInit {
     private modalCtrl: ModalController,
     private alertController: AlertController,
     private loadingController: LoadingController,
-    private toastController: ToastController,
     private interaction: InteractionsService
   ) {}
 
@@ -40,10 +39,16 @@ export class ProductListComponent implements OnInit {
 
   async obtenerProductos() {
     const loading = await this.showLoading('Cargando productos...');
-    this.database.getProductos(this.categoriaId).subscribe((res: Producto[]) => {
-      this.productos = res;
-      loading.dismiss();
-    });
+    this.database.getProductos(this.categoriaId).subscribe(
+      (res: Producto[]) => {
+        this.productos = res;
+        loading.dismiss();
+      },
+      (error) => {
+        loading.dismiss();
+        this.interaction.presentToast('Error al cargar productos', 'danger');
+      }
+    );
   }
 
   async agregarProducto() {

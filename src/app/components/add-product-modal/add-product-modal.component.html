@@ -9,33 +9,49 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label position="floating">Nombre del Producto</ion-label>
-      <ion-input formControlName="nombre" required></ion-input>
-    </ion-item>
+<ion-content class="modal-content">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-form">
+    <ion-card class="modal-card">
+      <ion-item>
+        <ion-label position="floating">Nombre del Producto</ion-label>
+        <ion-input formControlName="nombre" required></ion-input>
+      </ion-item>
+      <!-- Mensajes de error para el campo "nombre" -->
+      <ion-text color="danger" *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">
+        El nombre es obligatorio.
+      </ion-text>
+      <ion-text color="danger" *ngIf="form.get('nombre')?.hasError('minlength') && form.get('nombre')?.touched">
+        El nombre debe tener al menos 3 caracteres.
+      </ion-text>
+      <ion-text color="danger" *ngIf="form.get('nombre')?.hasError('maxlength') && form.get('nombre')?.touched">
+        El nombre no puede tener más de 50 caracteres.
+      </ion-text>
+      <ion-text color="danger" *ngIf="form.get('nombre')?.hasError('pattern') && form.get('nombre')?.touched">
+        El nombre solo puede contener letras, números y espacios.
+      </ion-text>
 
-    <ion-img *ngIf="imageUrl" [src]="imageUrl" class="imgProd"></ion-img>
+      <ion-img *ngIf="imageUrl" [src]="imageUrl" class="imgProd"></ion-img>
 
-    <!-- Campo de entrada de archivo -->
-    <ion-item fill="outline" lines="none" class="ion-margin">
-      <ion-label>Imagen</ion-label>
-      <input type="file" (change)="chooseFile($event)" />
-    </ion-item>
+      <ion-item fill="outline" lines="none" class="file-input-item">
+        <ion-label position="stacked" class="file-label">Imagen</ion-label>
+        <div class="file-input-wrapper">
+          <input type="file" (change)="chooseFile($event)" />
+        </div>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Precio</ion-label>
-      <ion-input type="number" formControlName="precio" required></ion-input>
-    </ion-item>
-    
-    <ion-item>
-      <ion-label position="floating">Stock</ion-label>
-      <ion-input type="number" formControlName="stock" required></ion-input>
-    </ion-item>
-    
-    <ion-button expand="full" type="submit" [disabled]="form.invalid">
-      {{ isEditing ? 'Actualizar' : 'Agregar' }}
-    </ion-button>
+      <ion-item>
+        <ion-label position="floating">Precio</ion-label>
+        <ion-input type="number" formControlName="precio" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Stock</ion-label>
+        <ion-input type="number" formControlName="stock" required></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" type="submit" [disabled]="form.invalid" class="submit-button">
+        {{ isEditing ? 'Actualizar' : 'Agregar' }}
+      </ion-button>
+    </ion-card>
   </form>
 </ion-content>

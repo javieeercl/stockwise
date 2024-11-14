@@ -3,7 +3,7 @@
       <ion-toolbar>
         <ion-buttons slot="end">
           <ion-menu-button>
-            <ion-icon  name="chevron-back"></ion-icon>
+            <ion-icon color="light"  name="chevron-back"></ion-icon>
           </ion-menu-button>
         </ion-buttons>
         <ion-title>Menú</ion-title>
@@ -14,13 +14,14 @@
 
       <ion-menu-toggle
       class="menu-items"
-      [autoHide]="false">
+      [autoHide]="false"
+      *ngIf="login">
         <ion-item
-          color="warning"
+          color="secondary"
           class="ion-padding-start"
           lines="none"
           detail="false"
-          [routerLink]="['/publico/portal']"
+          [routerLink]="['/privado/portal']"
           routerDirection="root"
           routerLinkActive="selected">
           <ion-icon slot="start" name="home-outline"></ion-icon>
@@ -32,7 +33,7 @@
       [autoHide]="false"
       *ngIf="login && rol === 'admin'">
         <ion-item
-          color="warning"
+          color="secondary"
           class="ion-padding-start"
           lines="none"
           detail="false"
@@ -48,7 +49,7 @@
         [autoHide]="false"
         *ngIf="!login">
         <ion-item
-          color="warning"
+          color="secondary"
           class="ion-padding-start ion-margin-bottom"
           lines="none"
           detail="false"
@@ -59,7 +60,7 @@
           <ion-label>Login</ion-label>
         </ion-item>
         <ion-item
-          color="warning"
+          color="secondary"
           class="ion-padding-start ion-margin-bottom"
           lines="none"
           detail="false"
@@ -70,7 +71,7 @@
           <ion-label>Registro</ion-label>
         </ion-item>
         <ion-item
-          color="warning"
+          color="secondary"
           class="ion-padding-start"
           lines="none"
           detail="false"
@@ -85,7 +86,7 @@
       class="menu-items"
       [autoHide]="false">
       <ion-item
-        color="warning"
+        color="secondary"
         class="ion-padding-start"
         lines="none"
         detail="false"
@@ -98,8 +99,8 @@
 
     </ion-content>
     <ion-footer class="ion-no-border">
-      <ion-toolbar color="warning">
-        <ion-item lines="none" color="warning">
+      <ion-toolbar color="secondary">
+        <ion-item lines="none" color="secondary">
           <ion-label slot="end">Alimentos Frescos del Sur</ion-label>
         </ion-item>
       </ion-toolbar>

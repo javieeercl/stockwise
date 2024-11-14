@@ -1,59 +1,54 @@
-<ion-header>
-  <ion-toolbar color="warning">
+<ion-header class="ion-no-border">
+  <ion-toolbar color="secondary">
     <ion-title class="ion-text-center center">
       <ion-label>
-        <ion-text color="dark">Inventario</ion-text>
-        <p><ion-text color="dark"><strong>Productos</strong></ion-text></p>
+        <ion-text color="light">Inventario</ion-text>
+        <p><ion-text color="light"><strong>Productos</strong></ion-text></p>
       </ion-label>
     </ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-back-button defaultHref="/publico/portal"></ion-back-button>
+      <ion-back-button defaultHref="/privado/portal"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button color="warning" (click)="agregarProducto()">
+    <ion-fab-button color="secondary" (click)="agregarProducto()">
       <ion-icon name="add-circle-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-  <div class="flex-center">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12" size-md="6" size-lg="4" *ngFor="let producto of productos">
-          <ion-card>
-            <ion-card-header>
-              <ion-item lines="none" class="ion-align-items-center">
-                <ion-thumbnail slot="start">
-                  <ion-img [src]="producto.imagenUrl || 'assets/default-image.png'"></ion-img>
-                </ion-thumbnail>
-                <ion-label>
-                  <ion-note color="dark"><b>{{ producto.nombre }}</b></ion-note>
-                  <p><strong>Precio:</strong> ${{ producto.precio }}</p>
-                  <p><strong>Stock:</strong> {{ producto.stock }}</p>
-                </ion-label>
-              </ion-item>
-            </ion-card-header>
-
-            <ion-card-content class="ion-text-center">
-              <ion-button color="secondary" (click)="editarProducto(producto)" expand="block">
-                <ion-icon slot="start" name="create-outline"></ion-icon>
-                Editar
-              </ion-button>
-              <ion-button *ngIf="producto.id" color="danger" (click)="confirmDeleteProduct(producto.id)" expand="block">
-                <ion-icon slot="start" name="trash-outline"></ion-icon>
-                Eliminar
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="4" size-lg="3" *ngFor="let producto of productos">
+        <ion-card class="custom-card">
+          <ion-card-header class="card-header">
+            <ion-thumbnail class="product-thumbnail">
+              <ion-img [src]="producto.imagenUrl || 'assets/default-image.png'"></ion-img>
+            </ion-thumbnail>
+            <ion-label class="product-label">
+              <h2>{{ producto.nombre }}</h2>
+              <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+              <p><strong>Stock:</strong> {{ producto.stock }}</p>
+            </ion-label>
+          </ion-card-header>
+    
+          <ion-card-content class="ion-text-center">
+            <ion-button color="secondary" (click)="editarProducto(producto)" expand="block">
+              <ion-icon slot="start" name="create-outline"></ion-icon>
+              Editar
             </ion-button>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <p *ngIf="productos.length === 0" class="ion-text-center">No hay productos disponibles para esta categoría.</p>
-  </div>
+            <ion-button *ngIf="producto.id" color="danger" (click)="confirmDeleteProduct(producto.id)" expand="block">
+              <ion-icon slot="start" name="trash-outline"></ion-icon>
+              Eliminar
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    
+  </ion-grid>
 </ion-content>

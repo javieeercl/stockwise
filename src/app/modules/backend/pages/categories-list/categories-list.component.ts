@@ -19,7 +19,7 @@ export class CategoriesListComponent implements OnInit {
     private modalCtrl: ModalController,
     private interaction: InteractionsService,
     private alertController: AlertController,
-    private loadingController: LoadingController // Inyecta el controlador de loading
+    private loadingController: LoadingController
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +54,7 @@ export class CategoriesListComponent implements OnInit {
         const loading = await this.showLoading('Creando categoría...');
         this.database.createCategoria(result.data)
           .then(() => {
-            this.obtenerCategorias();  // Actualiza la lista de categorías
+            this.obtenerCategorias();
             this.interaction.presentToast('Categoría creada con éxito', 'success');
           })
           .catch(() => this.interaction.presentToast('No se pudo crear la categoría', 'danger'))
@@ -87,17 +87,14 @@ export class CategoriesListComponent implements OnInit {
     return await modal.present();
   }
 
-  // Método para mostrar los productos de una categoría específica
   mostrarProductos(categoriaId: string) {
     this.router.navigate(['/backend/productos', categoriaId]);
   }
 
-  // Método para editar una categoría
   editCategory(category: Categoria) {
     this.openAddCategoryModalWithData(category);
   }
 
-  // Método para mostrar la alerta de confirmación antes de eliminar una categoría
   async confirmDeleteCategory(id: string) {
     const alert = await this.alertController.create({
       header: 'Confirmar eliminación',

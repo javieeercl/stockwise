@@ -8,7 +8,7 @@ ion-menu ion-content {
   .main-header {
       height: 25vh;
       width: 120%;
-      background: linear-gradient(to right,#fcb000, #ffd062)  !important;
+      background: #0163aa  !important;
       box-shadow: 0 1px 10px var(--ion-color-light);
       border-radius: 0 0 50% 50%;
       margin-left: -4.5vh;
@@ -63,15 +63,15 @@ ion-menu ion-content {
   .menu-items {
       padding-left: 20px;
       ion-item.selected {
-          --background: linear-gradient(to right,#fcb000, #ffd062)  !important;
-          border-left: 5px solid #fcb000;
+          --background: #0163aa  !important;
+          border-left: 5px solid #0163aa;
           ion-label {
-              color: black;
+              color: white;
               font-weight: bold;
           }
       }
       ion-item.selected ion-icon {
-          color: black;
+          color: white;
       }
   }
 }
@@ -87,14 +87,14 @@ ion-menu ion-header {
 
   }
   ion-toolbar {
-    --background: linear-gradient(to right,#fcb000, #ffd062)  !important;
+    --background: #0163aa  !important;
 
       --padding-start: 16px;
       --padding-end: 16px;
       ion-title {
           max-width: 40vh;
           font-weight: bold;
-          color: black;
+          color: white;
           ion-label {
               ion-text {
                   font-size: 0.8rem;

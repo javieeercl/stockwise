@@ -18,7 +18,15 @@
     margin-bottom: 10px;
   }
   
-  .user-label h2 {
+  .category-thumbnail {
+    width: 90px; /* Ajusta el tamaño de la imagen para que todas sean consistentes */
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  
+  .category-label h2 {
     font-size: 1.2em;
     font-weight: bold;
     color: #333;
@@ -33,16 +41,18 @@
     flex-direction: column;
   }
   
+
+  
   ion-button {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s, transform 0.2s;
-    width: 80%;
-    margin: 10px auto;
+    width: 80%; /* Hace que el botón sea más pequeño y centrado en la tarjeta */
+    margin: 10px auto; /* Centra el botón dentro de la tarjeta */
   }
   
   ion-button:hover {
-    background-color: #f0ad4e;
+    background-color: #f0ad4e; /* Cambia a un color más oscuro al pasar el mouse */
     transform: scale(1.05);
   }
   

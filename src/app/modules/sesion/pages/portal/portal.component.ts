@@ -1,4 +1,3 @@
-import { Tecnologia, Proyecto } from './../../../../models/models';
 import { DatabaseService, Usuario } from './../../../../services/database.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
@@ -20,14 +19,10 @@ export class PortalComponent implements OnInit {
   segmentValue = '1';
 
   categorias: any[] = [];
-  productos: any[] = [];
-
 
   newHeight = 0;
   rol: any;
 
-  contadorTecnologias!: number;
-  contadorProyectos!: number;
   contadorCategorias!: number;
   
 

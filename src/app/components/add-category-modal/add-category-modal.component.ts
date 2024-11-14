@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController, LoadingController } from '@ionic/angular';
+import { ModalController, LoadingController, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
@@ -17,16 +17,26 @@ export class AddCategoryModalComponent implements OnInit {
   form: FormGroup;
   imageFile: File | null = null;
   imageUrl: string | null = null;
+  selectedFileName: string = 'Sin archivo seleccionado';
 
   constructor(
     private modalCtrl: ModalController,
     private fb: FormBuilder,
     private storage: AngularFireStorage,
-    private loadingController: LoadingController // Inyecta el controlador de loading
+    private loadingController: LoadingController,
+    private toastController: ToastController
   ) {
     this.form = this.fb.group({
-      nombre: ['', Validators.required],
-      imagenUrl: [''],
+      nombre: [
+        '', 
+        [
+          Validators.required, 
+          Validators.minLength(3), 
+          Validators.maxLength(50), 
+          Validators.pattern('^[a-zA-Z0-9 ]+$')
+        ]
+      ],
+      imagenUrl: ['']
     });
   }
 
@@ -47,7 +57,17 @@ export class AddCategoryModalComponent implements OnInit {
   chooseFile(event: any) {
     const file = event.target.files[0];
     if (file) {
-      this.imageFile = file;
+      const validExtensions = ['image/png', 'image/jpeg'];
+      if (!validExtensions.includes(file.type)) {
+        this.presentToast('Formato de archivo no permitido. Solo se aceptan imágenes PNG o JPG.', 'danger');
+        this.selectedFileName = 'Sin archivo seleccionado';
+        this.imageFile = null;
+      } else {
+        this.selectedFileName = file.name;
+        this.imageFile = file;
+      }
+    } else {
+      this.selectedFileName = 'Sin archivo seleccionado';
     }
   }
 
@@ -60,10 +80,19 @@ export class AddCategoryModalComponent implements OnInit {
     return loading;
   }
 
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      color,
+    });
+    toast.present();
+  }
+
   async onSubmit() {
     if (this.form.valid) {
       const loading = await this.showLoading(this.isEditing ? 'Actualizando categoría...' : 'Creando categoría...');
-      
+
       if (this.imageFile) {
         const filePath = `Categoria/${new Date().getTime()}_${this.imageFile.name}`;
         const fileRef = this.storage.ref(filePath);
@@ -80,6 +109,7 @@ export class AddCategoryModalComponent implements OnInit {
                 (error) => {
                   console.error('Error al obtener la URL de la imagen: ', error);
                   loading.dismiss();
+                  this.presentToast('Error al subir la imagen', 'danger');
                 }
               );
             })
@@ -93,9 +123,10 @@ export class AddCategoryModalComponent implements OnInit {
   submitFormData(loading: HTMLIonLoadingElement) {
     const formData = {
       ...this.form.value,
-      imagenUrl: this.imageUrl
+      ...(this.imageUrl ? { imagenUrl: this.imageUrl } : {})
     };
     this.modalCtrl.dismiss(formData);
     loading.dismiss();
+    this.presentToast(this.isEditing ? 'Categoría actualizada con éxito' : 'Categoría creada con éxito', 'success');
   }
 }

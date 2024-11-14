@@ -1,11 +1,11 @@
-import { ContactoComponent } from './pages/contacto/contacto.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { PortalComponent } from './pages/portal/portal.component';
 
 const rutas: Routes = [{
   path:'',children:[
 
-      {path:'contacto',component:ContactoComponent},
+      {path:'portal',component:PortalComponent}
       // {path:'inscripcion',component:InscripcionTallerComponent},
       // {path:'postulacion',component:PostularInstructorComponent},
   ]

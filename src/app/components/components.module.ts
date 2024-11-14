@@ -7,8 +7,8 @@ import { CommonModule } from '@angular/common';
 import { ShrinkHeaderComponent } from './shrink-header/shrink-header.component';
 import { AddCategoryModalComponent } from './add-category-modal/add-category-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AddProductModalComponent } from './add-product-modal/add-product-modal.component';
 import { AddUserModalComponent } from './add-user-modal/add-user-modal.component';
+import { AddProductModalComponent } from './add-product-modal/add-product-modal.component';
 
 
 

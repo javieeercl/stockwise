@@ -69,9 +69,8 @@ export class DatabaseService {
     return this.firestore.collection('Categoria').doc(categoriaId).collection('Producto').doc(productoId).delete();
   }
 
-  createUsuario(usuario: Usuario): Promise<void> {
-    const uid = usuario.uid || this.firestore.createId();
-    return this.firestore.collection('Usuario').doc(uid).set({ ...usuario, uid });
+  updateUser(uid: string, userData: Partial<Usuario>) {
+    return this.firestore.collection('Usuario').doc(uid).update(userData);
   }
 
   // Obtener usuario por UID
@@ -79,9 +78,9 @@ export class DatabaseService {
     return this.firestore.collection<Usuario>('Usuario').doc(uid).valueChanges();
   }
 
-  // Actualizar usuario
-  updateUsuario(uid: string, data: Partial<Usuario>): Promise<void> {
-    return this.firestore.collection('Usuario').doc(uid).update(data);
+    // Obtener todos los usuarios
+  getUsuarios(): Observable<Usuario[]> {
+    return this.firestore.collection<Usuario>('Usuario').valueChanges();
   }
 
   // Eliminar usuario
