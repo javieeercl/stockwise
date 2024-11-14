@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar color="warning">
+  <ion-toolbar color="secondary">
     <ion-title class="ion-text-center">
-      <ion-text color="dark">{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</ion-text>
+      <ion-text color="light">{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</ion-text>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">Cerrar</ion-button>
@@ -49,7 +49,7 @@
         <ion-input type="number" formControlName="stock" required></ion-input>
       </ion-item>
 
-      <ion-button expand="full" type="submit" [disabled]="form.invalid" class="submit-button">
+      <ion-button expand="full" type="submit" [disabled]="form.invalid" class="submit-button" color="secondary">
         {{ isEditing ? 'Actualizar' : 'Agregar' }}
       </ion-button>
     </ion-card>

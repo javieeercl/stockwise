@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 export interface Categoria {
   id?: string;
@@ -32,6 +33,21 @@ export interface Usuario {
 })
 export class DatabaseService {
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) {}
+
+
+    // Obtener Categoria por UID
+    getCategoria(id: string): Observable<Categoria | null> {
+      return this.firestore.collection<Categoria>('Categoria').doc(id).valueChanges().pipe(
+        map((data) => {
+          if (data) {
+            return data;
+          } else {
+            console.warn(`No se encontró la categoría con ID ${id}`);
+            return null;
+          }
+        })
+      );
+    }
 
   // Métodos para Categorías
   getCategorias(): Observable<Categoria[]> {

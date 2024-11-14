@@ -1,54 +1,59 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>{{ isEditing ? 'Editar Usuario' : 'Agregar Usuario' }}</ion-title>
+  <ion-toolbar color="secondary">
+    <ion-title class="ion-text-center" color="light">
+      {{ isEditing ? 'Editar Usuario' : 'Agregar Usuario' }}
+    </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">Cerrar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <!-- Campo Email solo en modo de creación -->
-    <ion-item *ngIf="!isEditing">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input formControlName="email" type="email" required></ion-input>
-    </ion-item>
+<ion-content class="modal-content">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-form">
+    <ion-card class="modal-card">
+      <!-- Campo Email solo en modo de creación -->
+      <ion-item *ngIf="!isEditing">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="email" required></ion-input>
+      </ion-item>
 
-    <!-- Campo Nombre Completo siempre visible -->
-    <ion-item>
-      <ion-label position="floating">Nombre Completo</ion-label>
-      <ion-input formControlName="nombre_completo" required></ion-input>
-    </ion-item>
+      <!-- Campo Nombre Completo siempre visible -->
+      <ion-item>
+        <ion-label position="floating">Nombre Completo</ion-label>
+        <ion-input formControlName="nombre_completo" required></ion-input>
+      </ion-item>
 
-    <!-- Campo Contraseña solo en modo de creación -->
-    <ion-item *ngIf="!isEditing">
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input formControlName="password" type="password" required></ion-input>
-    </ion-item>
+      <!-- Campo Contraseña solo en modo de creación -->
+      <ion-item *ngIf="!isEditing">
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input formControlName="password" type="password" required></ion-input>
+      </ion-item>
 
-    <!-- Campo Confirmar Contraseña solo en modo de creación -->
-    <ion-item *ngIf="!isEditing">
-      <ion-label position="floating">Confirmar Contraseña</ion-label>
-      <ion-input formControlName="confirmar_password" type="password" required></ion-input>
-    </ion-item>
+      <!-- Campo Confirmar Contraseña solo en modo de creación -->
+      <ion-item *ngIf="!isEditing">
+        <ion-label position="floating">Confirmar Contraseña</ion-label>
+        <ion-input formControlName="confirmar_password" type="password" required></ion-input>
+      </ion-item>
 
-    <!-- Mensaje de error si las contraseñas no coinciden -->
-    <ion-item lines="none" *ngIf="form.hasError('mismatch') && form.get('confirmar_password')?.touched">
-      <ion-label color="danger">Las contraseñas no coinciden</ion-label>
-    </ion-item>
+      <!-- Mensaje de error si las contraseñas no coinciden -->
+      <ion-item lines="none" *ngIf="form.hasError('mismatch') && form.get('confirmar_password')?.touched">
+        <ion-label color="danger">Las contraseñas no coinciden</ion-label>
+      </ion-item>
 
-    <!-- Campo Rol siempre visible -->
-    <ion-item>
-      <ion-label>Rol</ion-label>
-      <ion-select formControlName="rol">
-        <ion-select-option value="admin">Admin</ion-select-option>
-        <ion-select-option value="usuario">Usuario</ion-select-option>
-      </ion-select>
-    </ion-item>
+      <!-- Campo Rol siempre visible -->
+      <ion-item>
+        <ion-label>Rol</ion-label>
+        <ion-select formControlName="rol">
+          <ion-select-option value="admin">Admin</ion-select-option>
+          <ion-select-option value="usuario">Usuario</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-    <ion-button expand="full" type="submit" [disabled]="form.invalid">
-      {{ isEditing ? 'Actualizar Usuario' : 'Crear Usuario' }}
-    </ion-button>
+      <!-- Botón de envío -->
+      <ion-button expand="full" type="submit" [disabled]="form.invalid" class="submit-button" color="secondary">
+        {{ isEditing ? 'Actualizar Usuario' : 'Crear Usuario' }}
+      </ion-button>
+    </ion-card>
   </form>
 </ion-content>

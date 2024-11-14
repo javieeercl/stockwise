@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, LoadingController, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-add-user-modal',
@@ -19,7 +20,8 @@ export class AddUserModalComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private loadingController: LoadingController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private database: DatabaseService
   ) {}
 
   ngOnInit() {
@@ -59,19 +61,19 @@ export class AddUserModalComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
+  
     const userData = { ...this.form.value, vigente: true };
     const loading = await this.presentLoading(this.isEditing ? 'Actualizando usuario...' : 'Creando usuario...');
-
+  
     try {
       if (this.isEditing) {
-        this.modalCtrl.dismiss(userData);
+        await this.database.updateUser(this.userData.uid, userData);
         this.presentToast('Usuario actualizado exitosamente', 'success');
       } else {
         await this.userService.createUser(userData);
         this.presentToast('Usuario creado exitosamente', 'success');
-        this.modalCtrl.dismiss();
       }
+      await this.modalCtrl.dismiss(userData);
     } catch (error) {
       console.error('Error:', error);
       this.presentToast('Error al procesar el usuario', 'danger');

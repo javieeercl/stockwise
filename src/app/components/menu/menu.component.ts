@@ -49,7 +49,7 @@ export class MenuComponent {
           handler: () => {
             this.auth.logout();
             this.interaction.presentToast('Sesión Finalizada', 'success');
-            this.router.navigate(['/publico/portal'])
+            this.router.navigate(['/privado/portal'])
           }
         }
       ]

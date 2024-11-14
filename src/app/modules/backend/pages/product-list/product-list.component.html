@@ -21,6 +21,11 @@
       <ion-icon name="add-circle-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <div class="category-header">
+    <h2>{{ nombreCategoria }}</h2>
+  </div>
+
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="4" size-lg="3" *ngFor="let producto of productos">
@@ -37,7 +42,7 @@
           </ion-card-header>
     
           <ion-card-content class="ion-text-center">
-            <ion-button color="secondary" (click)="editarProducto(producto)" expand="block">
+            <ion-button color="warning" (click)="editarProducto(producto)" expand="block">
               <ion-icon slot="start" name="create-outline"></ion-icon>
               Editar
             </ion-button>

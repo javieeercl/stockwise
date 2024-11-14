@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ModalController, AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { ModalController, AlertController, LoadingController } from '@ionic/angular';
 import { AddProductModalComponent } from 'src/app/components/add-product-modal/add-product-modal.component';
 import { DatabaseService, Producto } from 'src/app/services/database.service';
 import { InteractionsService } from 'src/app/services/interactions.service';
@@ -11,6 +11,7 @@ import { InteractionsService } from 'src/app/services/interactions.service';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
+  nombreCategoria: string = ''; // Nombre de la categoría
   productos: Producto[] = [];
   categoriaId: string = '';
 
@@ -34,6 +35,15 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoriaId = this.route.snapshot.paramMap.get('id') || '';
+
+    this.database.getCategoria(this.categoriaId).subscribe((categoria) => {
+      if (categoria) {
+        this.nombreCategoria = categoria.nombre;
+      } else {
+        this.interaction.presentToast('Categoría no encontrada', 'danger');
+      }
+    });
+
     this.obtenerProductos();
   }
 
