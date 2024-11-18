@@ -3,7 +3,9 @@
     <ion-title class="ion-text-center center">
       <ion-label>
         <ion-text color="light">Bienvenido a</ion-text>
-        <p><ion-text color="light"><strong>StockWise</strong></ion-text></p>
+        <p>
+          <ion-text color="light"><strong>StockWise</strong></ion-text>
+        </p>
       </ion-label>
     </ion-title>
     <ion-buttons slot="start">
@@ -26,18 +28,29 @@
 <ion-content [scrollEvents]="true" (ionScroll)="scroll($event)" #myContent>
   <ion-grid>
     <ion-row *ngIf="segmentValue === '1'">
-      <ion-col size="12" size-md="4" size-lg="3" *ngFor="let item of categorias">
+      <ion-col
+        size="12"
+        size-md="4"
+        size-lg="3"
+        *ngFor="let item of categorias"
+      >
         <ion-card class="custom-card" (click)="mostrarProductos(item.id)">
           <ion-card-header class="card-header">
             <ion-thumbnail class="category-thumbnail">
-              <ion-img [src]="item.imagenUrl || 'assets/default-image.png'"></ion-img>
+              <ion-img
+                [src]="item.imagenUrl || 'assets/default-image.png'"
+              ></ion-img>
             </ion-thumbnail>
             <ion-label class="category-label">
               <h2>{{ item.nombre }}</h2>
             </ion-label>
           </ion-card-header>
           <ion-card-content>
-            <ion-button expand="full" color="secondary" (click)="mostrarProductos(item.id)">
+            <ion-button
+              expand="full"
+              color="secondary"
+              (click)="mostrarProductos(item.id)"
+            >
               <ion-icon slot="start" name="eye"></ion-icon>
               Ver
             </ion-button>
@@ -45,8 +58,31 @@
         </ion-card>
       </ion-col>
     </ion-row>
-    <ion-row *ngIf="segmentValue === '2'">
-      <h1>Analytics</h1>
+    <ion-row class="rowxd" *ngIf="segmentValue === '2'">
+      <ion-col size="12">
+        <div class="xd">
+          <h2>Cantidad de Productos vendidos</h2>
+          <iframe
+            width="600"
+            height="450"
+            src="https://lookerstudio.google.com/embed/reporting/7b6002d7-f440-40e4-8934-9ec70a6d7c59/page/pnfTE"
+            frameborder="0"
+            style="border: 0"
+            allowfullscreen
+            sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+          ></iframe>
+          <h2> Variabilidad de Stock por Producto</h2>
+          <iframe
+            width="600"
+            height="450"
+            src="https://lookerstudio.google.com/embed/reporting/d0faf978-1091-4c11-8910-129a0c93f87e/page/lGeTE"
+            frameborder="0"
+            style="border: 0"
+            allowfullscreen
+            sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+          ></iframe>
+        </div>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

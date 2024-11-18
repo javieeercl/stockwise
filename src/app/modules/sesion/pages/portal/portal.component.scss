@@ -1,58 +1,87 @@
 .custom-card {
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, box-shadow 0.2s;
-    text-align: center;
-    padding: 15px;
-  }
-  
-  .custom-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  }
-  
-  .card-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .category-thumbnail {
-    width: 90px; /* Ajusta el tamaño de la imagen para que todas sean consistentes */
-    height: 90px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 10px;
-  }
-  
-  .category-label h2 {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #333;
-    margin: 0;
-    padding: 5px 0;
-  }
-  
-  .flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+  padding: 15px;
+}
 
-  
-  ion-button {
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s, transform 0.2s;
-    width: 80%; /* Hace que el botón sea más pequeño y centrado en la tarjeta */
-    margin: 10px auto; /* Centra el botón dentro de la tarjeta */
-  }
-  
-  ion-button:hover {
-    background-color: #f0ad4e; /* Cambia a un color más oscuro al pasar el mouse */
-    transform: scale(1.05);
-  }
-  
+.custom-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.category-thumbnail {
+  width: 90px; /* Ajusta el tamaño de la imagen para que todas sean consistentes */
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.category-label h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  padding: 5px 0;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+ion-button {
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+  width: 80%; /* Hace que el botón sea más pequeño y centrado en la tarjeta */
+  margin: 10px auto; /* Centra el botón dentro de la tarjeta */
+}
+
+ion-button:hover {
+  background-color: #f0ad4e; /* Cambia a un color más oscuro al pasar el mouse */
+  transform: scale(1.05);
+}
+.rowxd {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: center; /* Centrar el texto */
+}
+
+.rowxd h1 {
+  margin-bottom: 1rem; /* Agregar espacio debajo del título */
+  font-size: 1.8rem; /* Ajustar tamaño del título */
+  color: #333; /* Color profesional */
+}
+
+iframe {
+  padding: 0;
+  margin: 0 auto; /* Centrar los iframes */
+  box-sizing: border-box;
+  width: 90%; /* Hacer que ocupe el 90% del ancho del contenedor */
+  max-width: 800px; /* Limitar el ancho máximo */
+  height: 430px; /* Ajustar altura */
+  border-radius: 10px; /* Esquinas redondeadas para un diseño más limpio */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para darle un efecto de elevación */
+}
+
+.xd {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar elementos en el eje horizontal */
+  gap: 1.5rem; /* Espaciado entre los iframes */
+  margin-top: 1rem; /* Margen superior para separarlo del h1 */
+}
