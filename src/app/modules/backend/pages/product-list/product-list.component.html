@@ -29,8 +29,14 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="4" size-lg="3" *ngFor="let producto of productos">
-        <ion-card class="custom-card"
-        [class]="getStockStatus(producto.stock)">
+        <ion-card
+          class="custom-card"
+          [ngClass]="{
+            'critical-stock': producto.stock < 5,
+            'low-stock': producto.stock >= 5 && producto.stock < 10,
+            'normal-stock': producto.stock >= 10
+          }"
+        >
           <ion-card-header class="card-header">
             <ion-thumbnail class="product-thumbnail">
               <ion-img [src]="producto.imagenUrl || 'assets/default-image.png'"></ion-img>
@@ -39,8 +45,14 @@
               <h2>{{ producto.nombre }}</h2>
               <p><strong>Precio:</strong> ${{ producto.precio }}</p>
               <p>
-                <strong>Stock:</strong> 
-                <span [class]="getStockTextClass(producto.stock)">
+                <strong>Stock:</strong>
+                <span
+                  [ngClass]="{
+                    'text-danger': producto.stock < 5,
+                    'text-warning': producto.stock >= 5 && producto.stock < 10,
+                    'text-success': producto.stock >= 10
+                  }"
+                >
                   {{ producto.stock }}
                 </span>
               </p>

@@ -9,6 +9,7 @@ import { AddCategoryModalComponent } from './add-category-modal/add-category-mod
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddUserModalComponent } from './add-user-modal/add-user-modal.component';
 import { AddProductModalComponent } from './add-product-modal/add-product-modal.component';
+import { StockAlertModalComponent } from './stock-alert-modal/stock-alert-modal.component';
 
 
 
@@ -19,7 +20,8 @@ import { AddProductModalComponent } from './add-product-modal/add-product-modal.
     FooterComponent,
     AddCategoryModalComponent,
     AddProductModalComponent,
-    AddUserModalComponent
+    AddUserModalComponent,
+    StockAlertModalComponent
   ],  imports: [
     CommonModule,
     RouterModule,
@@ -34,7 +36,8 @@ import { AddProductModalComponent } from './add-product-modal/add-product-modal.
     FooterComponent,
     AddCategoryModalComponent,
     AddProductModalComponent,
-    AddUserModalComponent
+    AddUserModalComponent,
+    StockAlertModalComponent
   ],
 })
 export class ComponentsModule { }

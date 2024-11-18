@@ -1,7 +1,8 @@
+/* Estilo base para las tarjetas */
 .custom-card {
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   text-align: center;
   padding: 15px;
 }
@@ -11,6 +12,70 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
+/* Animación de productos críticos */
+.critical-stock {
+  border: 2px solid red;
+  animation: pulse 1.5s infinite;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.critical-stock:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 24px rgba(255, 0, 0, 0.5);
+}
+
+/* Productos con stock bajo */
+.low-stock {
+  border: 2px solid orange;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.low-stock:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(255, 165, 0, 0.5);
+}
+
+/* Productos con stock normal */
+.normal-stock {
+  border: 2px solid green;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.normal-stock:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 128, 0, 0.5);
+}
+
+/* Animación de pulso */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  }
+}
+
+/* Estilo del texto */
+.text-danger {
+  color: red;
+  font-weight: bold;
+}
+
+.text-warning {
+  color: orange;
+  font-weight: bold;
+}
+
+.text-success {
+  color: green;
+  font-weight: bold;
+}
+
+/* General */
 .card-header {
   display: flex;
   flex-direction: column;
@@ -65,64 +130,3 @@ ion-button:hover {
   color: #333;
 }
 
-.low-stock {
-  border: 2px solid orange;
-}
-
-.critical-stock {
-  border: 2px solid red;
-  animation: pulse 1s infinite;
-}
-
-.normal-stock {
-  border: 2px solid green;
-}
-
-.text-danger {
-  color: red;
-  font-weight: bold;
-}
-
-.text-warning {
-  color: orange;
-  font-weight: bold;
-}
-
-.text-success {
-  color: green;
-  font-weight: bold;
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 5px red;
-  }
-  50% {
-    box-shadow: 0 0 15px red;
-  }
-  100% {
-    box-shadow: 0 0 5px red;
-  }
-}
-
-.custom-toast .toast-message {
-  font-size: 14px;
-  line-height: 1.5; /* Espaciado entre líneas */
-}
-
-.custom-toast {
-  font-family: 'Arial', sans-serif;
-  white-space: pre-wrap; /* Respetar los saltos de línea (\n) */
-  font-size: 14px;
-  line-height: 1.5; /* Ajustar el espaciado entre líneas */
-  background-color: #333; /* Fondo oscuro */
-  color: #fff; /* Texto claro */
-  border-radius: 8px; /* Bordes redondeados */
-  padding: 10px; /* Espaciado interno */
-  text-align: left; /* Alinear el texto a la izquierda */
-}
-
-.custom-toast .toast-button {
-  color: #ffcc00; /* Color del botón de cerrar */
-  font-weight: bold;
-}

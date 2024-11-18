@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Alerta de Stock</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="alert-section" *ngIf="productosCriticos.length > 0">
+    <h3 class="section-header">
+      <ion-icon name="alert-circle-outline" class="icon-critical"></ion-icon>
+      Productos con stock crítico:
+    </h3>
+    <ion-list>
+      <ion-item lines="none" *ngFor="let producto of productosCriticos">
+        <ion-label>
+          <strong>{{ producto.nombre }}</strong>
+          <p>Stock: <span class="critical">{{ producto.stock }}</span></p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div class="alert-section" *ngIf="productosBajos.length > 0">
+    <h3 class="section-header">
+      <ion-icon name="warning-outline" class="icon-low"></ion-icon>
+      Productos con stock bajo:
+    </h3>
+    <ion-list>
+      <ion-item lines="none" *ngFor="let producto of productosBajos">
+        <ion-label>
+          <strong>{{ producto.nombre }}</strong>
+          <p>Stock: <span class="low">{{ producto.stock }}</span></p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="productosCriticos.length === 0 && productosBajos.length === 0" class="empty-alert">
+    <ion-icon name="checkmark-circle-outline"></ion-icon>
+    <p>Todos los productos tienen niveles de stock adecuados.</p>
+  </div>
+</ion-content>

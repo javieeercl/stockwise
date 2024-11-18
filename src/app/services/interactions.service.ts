@@ -25,8 +25,9 @@ export class InteractionsService {
     const toast = await this.toastController.create({
       message: options.message,
       position: options.position || 'bottom',
-      cssClass: options.cssClass || 'custom-toast', // Clase personalizada
+      cssClass: options.cssClass || '', // Permitir la clase personalizada
       buttons: options.buttons || [],
+      duration: options.duration || undefined, // Sin duración para cierre manual
     });
     return toast;
   }
