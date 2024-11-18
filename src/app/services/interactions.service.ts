@@ -21,6 +21,16 @@ export class InteractionsService {
     toast.present();
   }
 
+  async presentToastWithOptions(options: any) {
+    const toast = await this.toastController.create({
+      message: options.message,
+      position: options.position || 'bottom',
+      cssClass: options.cssClass || 'custom-toast', // Clase personalizada
+      buttons: options.buttons || [],
+    });
+    return toast;
+  }
+  
   async toastError(error: any) {
     const toast = await this.toastController.create({
       message:

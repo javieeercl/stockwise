@@ -64,3 +64,65 @@ ion-button:hover {
   font-weight: bold;
   color: #333;
 }
+
+.low-stock {
+  border: 2px solid orange;
+}
+
+.critical-stock {
+  border: 2px solid red;
+  animation: pulse 1s infinite;
+}
+
+.normal-stock {
+  border: 2px solid green;
+}
+
+.text-danger {
+  color: red;
+  font-weight: bold;
+}
+
+.text-warning {
+  color: orange;
+  font-weight: bold;
+}
+
+.text-success {
+  color: green;
+  font-weight: bold;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 5px red;
+  }
+  50% {
+    box-shadow: 0 0 15px red;
+  }
+  100% {
+    box-shadow: 0 0 5px red;
+  }
+}
+
+.custom-toast .toast-message {
+  font-size: 14px;
+  line-height: 1.5; /* Espaciado entre líneas */
+}
+
+.custom-toast {
+  font-family: 'Arial', sans-serif;
+  white-space: pre-wrap; /* Respetar los saltos de línea (\n) */
+  font-size: 14px;
+  line-height: 1.5; /* Ajustar el espaciado entre líneas */
+  background-color: #333; /* Fondo oscuro */
+  color: #fff; /* Texto claro */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 10px; /* Espaciado interno */
+  text-align: left; /* Alinear el texto a la izquierda */
+}
+
+.custom-toast .toast-button {
+  color: #ffcc00; /* Color del botón de cerrar */
+  font-weight: bold;
+}

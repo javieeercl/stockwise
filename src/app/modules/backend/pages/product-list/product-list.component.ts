@@ -14,6 +14,7 @@ export class ProductListComponent implements OnInit {
   nombreCategoria: string = ''; // Nombre de la categoría
   productos: Producto[] = [];
   categoriaId: string = '';
+  STOCK_UMBRAL_BAJO!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +23,9 @@ export class ProductListComponent implements OnInit {
     private alertController: AlertController,
     private loadingController: LoadingController,
     private interaction: InteractionsService
-  ) {}
+  ) {
+    this.STOCK_UMBRAL_BAJO = 10;
+  }
 
   async showLoading(message: string) {
     const loading = await this.loadingController.create({
@@ -50,9 +53,15 @@ export class ProductListComponent implements OnInit {
   async obtenerProductos() {
     const loading = await this.showLoading('Cargando productos...');
     this.database.getProductos(this.categoriaId).subscribe(
-      (res: Producto[]) => {
-        this.productos = res;
+      async (res: Producto[]) => {
+        this.productos = res.map(producto => ({
+          ...producto,
+          isLowStock: producto.stock < this.STOCK_UMBRAL_BAJO // Identificar si el stock es bajo
+        }));
         loading.dismiss();
+  
+        // Mostrar alertas después de cargar productos
+        await this.mostrarAlertasDeStock();
       },
       (error) => {
         loading.dismiss();
@@ -60,6 +69,7 @@ export class ProductListComponent implements OnInit {
       }
     );
   }
+  
 
   async agregarProducto() {
     const modal = await this.modalCtrl.create({
@@ -105,6 +115,56 @@ export class ProductListComponent implements OnInit {
     return await modal.present();
   }
 
+  getStockStatus(stock: number): string {
+    if (stock < 5) {
+      return 'critical-stock';
+    } else if (stock < 10) {
+      return 'low-stock';
+    }
+    return 'normal-stock';
+  }
+  
+  getStockTextClass(stock: number): string {
+    if (stock < 5) {
+      return 'text-danger';
+    } else if (stock < 10) {
+      return 'text-warning';
+    }
+    return 'text-success';
+  }
+  
+  async mostrarAlertasDeStock() {
+    const productosCriticos = this.productos.filter(p => p.stock < 5); // Stock crítico
+    const productosBajos = this.productos.filter(p => p.stock >= 5 && p.stock < 10); // Stock bajo
+  
+    let mensaje = '';
+  
+    if (productosCriticos.length > 0) {
+      mensaje += 'Productos con stock crítico:\n';
+      mensaje += productosCriticos.map(p => `- ${p.nombre} (${p.stock})`).join('\n') + '\n\n';
+    }
+  
+    if (productosBajos.length > 0) {
+      mensaje += 'Productos con stock bajo:\n';
+      mensaje += productosBajos.map(p => `- ${p.nombre} (${p.stock})`).join('\n');
+    }
+  
+    if (mensaje) {
+      const toast = await this.interaction.presentToastWithOptions({
+        message: mensaje, // Mensaje con saltos de línea
+        position: 'bottom',
+        cssClass: 'custom-toast', // Clase CSS personalizada
+        buttons: [
+          {
+            text: 'Cerrar',
+            role: 'cancel', // Permite cerrar el Toast
+          },
+        ],
+      });
+      toast.present();
+    }
+  }
+  
   async confirmDeleteProduct(id: string) {
     const alert = await this.alertController.create({
       header: 'Confirmar eliminación',
