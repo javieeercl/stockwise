@@ -21,6 +21,9 @@
       <ion-segment-button value="2">
         <ion-label>Analytics</ion-label>
       </ion-segment-button>
+      <ion-segment-button value="3">
+        <ion-label>Mineria</ion-label>
+      </ion-segment-button>
     </ion-segment>
   </div>
 </ion-header>
@@ -71,7 +74,7 @@
             allowfullscreen
             sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
           ></iframe>
-          <h2> Variabilidad de Stock por Producto</h2>
+          <h2>Variabilidad de Stock por Producto</h2>
           <iframe
             width="600"
             height="450"
@@ -81,6 +84,64 @@
             allowfullscreen
             sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
           ></iframe>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="rowxd" *ngIf="segmentValue === '3'">
+      <ion-col size="12">
+        <div class="xd">
+
+          <h2>Mineria de Datos StockWise</h2>
+          <ion-card class="custom-card">
+            <ion-card-header class="card-header">
+                <ion-img
+                  src="\assets\images\image1.png"
+                ></ion-img>
+              <ion-label class="category-label">
+              </ion-label>
+            </ion-card-header>
+          </ion-card>
+
+          <ion-card class="custom-card">
+            <ion-card-header class="card-header">
+                <ion-img
+                  src="\assets\images\image2.png"
+                ></ion-img>
+              <ion-label class="category-label">
+              </ion-label>
+            </ion-card-header>
+          </ion-card>
+
+          <ion-card class="custom-card">
+            <ion-card-header class="card-header">
+                <ion-img
+                  src="\assets\images\image3.png"
+                ></ion-img>
+              <ion-label class="category-label">
+              </ion-label>
+            </ion-card-header>
+          </ion-card>
+
+          <ion-card class="custom-card">
+            <ion-card-header class="card-header">
+                <ion-img
+                  src="\assets\images\image4.png"
+                ></ion-img>
+              <ion-label class="category-label">
+              </ion-label>
+            </ion-card-header>
+          </ion-card>
+
+          <ion-card class="custom-card">
+            <ion-card-header class="card-header">
+                <ion-img
+                  src="\assets\images\image5.png"
+                ></ion-img>
+              <ion-label class="category-label">
+              </ion-label>
+            </ion-card-header>
+          </ion-card>
+
         </div>
       </ion-col>
     </ion-row>
